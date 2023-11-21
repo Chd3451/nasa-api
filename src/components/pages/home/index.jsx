@@ -43,8 +43,7 @@ export default function Home() {
   }, []);
   return (
       <View>
-          <Text style={styles.texto}>By Frank 2021-0226 and</Text>
-          <Text style={styles.texto}>Enmanuel 2021-0618 and</Text>
+  
           <Text style={styles.texto}>Home</Text>
       <Header />
           <TodaysImage {...todaysImage} />
