@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Button } from "react-native";
 
-export default function dailyImages({ date, title, url }) {
+export default function TodaysImage({ date, title, url }) {
   return (
     <View style={styles.container}>
         <Image style={styles.image} source={{ uri: url }} />
