@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 import { format, sub } from "date-fns";
 
 import api from "../../../utils/api";
-import TodaysImage from "../../molecules/todays-image";
+import TodaysImage from "../../molecules/daily-images";
 import LastFiveDaysImages from "../../organisms/last-five-days";
 import Header from "../../molecules/header";
 
