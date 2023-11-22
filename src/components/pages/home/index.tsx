@@ -3,16 +3,16 @@ import { View, StyleSheet, Text } from "react-native";
 import { format, sub } from "date-fns";
 
 import api from "../../../utils/api";
-import TodaysImage from "../../molecules/todays-image";
-import LastFiveDaysImages from "../../organisms/last-five-days";
+import TodaysImage from "../../molecules/daily-image";
+import LastWeekImages from "../../organism/last-week";
 import Header from "../../molecules/header";
 
 export default function Home() {
   const [todaysImage, setTodaysImage] = useState();
-  const [lastFiveDaysImage, setLastFiveDaysImage] = useState();
+  const [lastWeekImage, setLastWeekImage] = useState();
 
   useEffect(() => {
-    const lodTodaysImage = async () => {
+    const loadTodaysImage = async () => {
       try {
         const todaysImageResponse = await api();
         setTodaysImage(todaysImageResponse);
@@ -22,32 +22,31 @@ export default function Home() {
       }
     };
 
-    const loadLast5DaysImage = async () => {
+    const loadLastWeekImage = async () => {
       try {
         const date = new Date();
         const todaysDate = format(date, "yyyy-MM-dd");
-        const fiveDaysAgoDate = format(sub(date, { days: 5 }), "yyyy-MM-dd");
+        const WeekAgoDate = format(sub(date, { days: 5 }), "yyyy-MM-dd");
 
-        const lastFiveDaysImageResponse = await api(
-          `&start_date=${fiveDaysAgoDate}&end_date=${todaysDate}`
+        const lastWeekImageResponse = await api(
+          `&start_date=${WeekAgoDate}&end_date=${todaysDate}`
         );
-        setLastFiveDaysImage(lastFiveDaysImageResponse);
+        setLastWeekImage(lastWeekImageResponse);
       } catch (error) {
         console.log(error);
-        setLastFiveDaysImage(undefined);
+        setLastWeekImage(undefined);
       }
     };
 
-      lodTodaysImage().catch(null);
-      loadLast5DaysImage().catch(null);
+      loadTodaysImage().catch(null);
+      loadLastWeekImage().catch(null);
   }, []);
   return (
       <View>
-  
           <Text style={styles.texto}>Home</Text>
       <Header />
           <TodaysImage {...todaysImage} />
-          <LastFiveDaysImages />
+          <LastWeekImages />
     </View>
   );
 }
@@ -60,6 +59,7 @@ const styles = StyleSheet.create({
     texto: {
         color: '#fff',
         textAlign: 'center',
-        fontWeight:'bold'
+        fontWeight:'bold',
+        fontSize: 20,
     }
 });
